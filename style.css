@@ -1,0 +1,374 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&display=swap');
+
+/* Root variables: neon blues & purples, glass effect colors */
+:root {
+  --color-bg-dark: #0b0c10;
+  --color-bg-gradient-start: #1f2833;
+  --color-bg-gradient-end: #45a29e;
+  --color-text-main: #c5c6c7;
+  --color-text-accent: #66fcf1;
+  --color-neon-pink: #ff0080;
+  --color-neon-purple: #9b59b6;
+  --color-btn-start: #45a29e;
+  --color-btn-end: #66fcf1;
+  --color-btn-hover-start: #66fcf1;
+  --color-btn-hover-end: #45a29e;
+  --border-radius: 14px;
+  --shadow-neon: 0 0 10px 2px var(--color-text-accent);
+  --font-primary: 'Poppins', sans-serif;
+  --font-display: 'Orbitron', monospace;
+}
+
+/* Global reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: var(--font-primary);
+  background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-end));
+  color: var(--color-text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+  perspective: 1200px;
+}
+
+/* Neon "Leftie" watermark behind content */
+body::before {
+  content: "Leftie";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18vw;
+  color: rgba(102, 252, 241, 0.07);
+  text-shadow:
+    0 0 40px rgba(102, 252, 241, 0.25),
+    0 0 120px rgba(102, 252, 241, 0.12);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: 0.3em;
+  mix-blend-mode: screen;
+}
+
+/* Container for the contacts table */
+#table {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  background: rgba(15, 17, 20, 0.85);
+  border-radius: var(--border-radius);
+  padding: 3rem 4rem;
+  box-shadow:
+    0 0 35px 6px var(--color-text-accent),
+    inset 0 0 30px rgba(102, 252, 241, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 3rem;
+}
+
+/* Hover glow on container */
+#table:hover {
+  box-shadow:
+    0 0 45px 8px var(--color-text-accent),
+    inset 0 0 50px rgba(102, 252, 241, 0.3);
+}
+
+/* Contacts table */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 1.8rem;
+  font-size: 1.15rem;
+  user-select: text;
+}
+
+/* Table cells */
+td {
+  background: rgba(25, 32, 39, 0.9);
+  padding: 2rem 2.8rem;
+  border-radius: var(--border-radius);
+  box-shadow:
+    0 0 18px 3px rgba(102, 252, 241, 0.15),
+    inset 0 0 15px rgba(255 255 255 / 0.07);
+  vertical-align: middle;
+  cursor: pointer;
+  transition:
+    background-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.3s ease;
+}
+
+td:hover {
+  background: var(--color-text-accent);
+  color: var(--color-bg-dark);
+  box-shadow:
+    0 0 32px 10px var(--color-text-accent),
+    inset 0 0 35px rgba(255 255 255 / 0.3);
+  transform: scale(1.08);
+  position: relative;
+  z-index: 20;
+}
+
+/* Avatar images */
+td img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-text-accent);
+  box-shadow:
+    0 0 18px 5px var(--color-text-accent);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+td img:hover {
+  transform: scale(1.25);
+  box-shadow:
+    0 0 45px 8px var(--color-neon-pink),
+    0 0 75px 15px rgba(255, 0, 128, 0.85);
+}
+
+/* Headings in table */
+h5 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: inherit;
+  letter-spacing: 0.06em;
+  user-select: none;
+  text-shadow:
+    0 0 5px rgba(102, 252, 241, 0.9);
+  line-height: 1.2;
+}
+
+/* Buttons container, perfectly centered horizontally */
+.buttons-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+  z-index: 1;
+  flex-wrap: nowrap;
+}
+
+/* Buttons styling */
+button {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  padding: 1.3rem 4rem;
+  background: linear-gradient(135deg, var(--color-btn-start), var(--color-btn-end));
+  color: var(--color-bg-dark);
+  border-radius: 9999px;
+  border: none;
+  box-shadow:
+    0 0 15px 5px var(--color-text-accent);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.3s ease;
+  user-select: none;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+button:hover {
+  background: linear-gradient(135deg, var(--color-btn-hover-start), var(--color-btn-hover-end));
+  box-shadow:
+    0 0 35px 12px var(--color-text-accent),
+    0 0 80px 22px var(--color-text-accent);
+  transform: translateY(-7px) scale(1.08);
+}
+
+button:active {
+  box-shadow:
+    0 0 25px 8px var(--color-text-accent);
+  transform: translateY(0) scale(0.95);
+}
+
+/* Forms */
+form {
+  max-width: 520px;
+  width: 100%;
+  background: rgba(15, 17, 20, 0.95);
+  padding: 3.5rem 4rem;
+  border-radius: var(--border-radius);
+  box-shadow:
+    0 0 45px 8px var(--color-text-accent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  user-select: none;
+  text-align: left;
+  margin: 0 auto 4rem;
+  font-size: 1.05rem;
+  color: var(--color-text-main);
+  transition: box-shadow 0.3s ease;
+}
+
+form:hover {
+  box-shadow:
+    0 0 60px 12px var(--color-text-accent);
+}
+
+form label {
+  font-weight: 700;
+  color: var(--color-text-accent);
+  margin-bottom: 0.8rem;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  user-select: text;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+  width: 100%;
+  padding: 1.15rem 1.6rem;
+  border-radius: 14px;
+  border: none;
+  font-weight: 600;
+  font-size: 1.15rem;
+  background: rgba(255 255 255 / 0.12);
+  color: var(--color-text-main);
+  box-shadow: inset 0 0 18px rgba(255 255 255 / 0.2);
+  margin-bottom: 1.8rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="file"]:focus {
+  outline: none;
+  background: rgba(255 255 255 / 0.3);
+  box-shadow:
+    0 0 18px 5px var(--color-text-accent),
+    inset 0 0 30px var(--color-text-accent);
+  color: #fff;
+  caret-color: var(--color-text-accent);
+}
+
+/* Submit Button */
+form button {
+  width: 100%;
+  padding: 1.4rem 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--color-btn-hover-start), var(--color-btn-hover-end));
+  border-radius: 9999px;
+  border: none;
+  color: var(--color-bg-dark);
+  cursor: pointer;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 40px 10px var(--color-text-accent);
+  transition: box-shadow 0.45s ease, transform 0.35s ease;
+}
+
+form button:hover {
+  box-shadow:
+    0 0 60px 18px var(--color-text-accent);
+  transform: translateY(-4px) scale(1.07);
+}
+
+form button:active {
+  box-shadow:
+    0 0 30px 10px var(--color-text-accent);
+  transform: translateY(0) scale(0.94);
+}
+
+/* Responsive adjustments */
+@media (max-width: 850px) {
+  #table {
+    padding: 2rem 2.5rem;
+  }
+
+  td {
+    padding: 1.6rem 2rem;
+    font-size: 1rem;
+  }
+
+  td img {
+    width: 54px;
+    height: 54px;
+  }
+
+  .buttons-container {
+    gap: 1.5rem;
+  }
+
+  button {
+    font-size: 1.15rem;
+    padding: 1rem 2.75rem;
+  }
+
+  form {
+    padding: 2.5rem 2rem;
+    margin: 2rem auto 3rem;
+  }
+
+  form button {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #table {
+    padding: 1.5rem 1.5rem;
+  }
+
+  td {
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  td img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+  }
+
+  form {
+    padding: 2rem 1.25rem;
+  }
+
+  form button {
+    font-size: 1.2rem;
+  }
+}
